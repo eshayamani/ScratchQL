@@ -1,3 +1,80 @@
+<!DOCTYPE html>
+<html>
 <head>
-  ScratchQL
+    <title>ScratchQL</title>
+    <!-- <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+    <script src="custom_blocks.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="styles.css"> 
 </head>
+<body>
+    <div class="row">
+        <div id="blocklyDiv" class="full-width"></div>
+        <!-- <xml id="toolbox" style="display: none">
+            <block type="functionDef"></block>
+            <block type="functionCall"></block>
+            <block type="abs"></block>
+            <block type="app"></block>
+            <block type="var"></block>
+            <block type="math_number"></block>
+            <block type="math_arithmetic"></block>
+        </xml> -->
+    </div>
+    <div class="row button-row">
+        <button onclick="generateCode()">Generate JavaScript</button>
+        <button onclick="runCode()">Run JavaScript</button>
+        <button onclick="saveBlocks()">Save Blocks</button>
+        <button onclick="loadBlocks()">Load Blocks</button>
+        <input type="file" id="loadInput" style="display: none;" onchange="loadBlocksFile(event)">
+    </div>
+    <div class="row">
+        <div id="codeDiv" class="half-width"></div>
+        <div id="outputDiv" class="half-width"></div>
+    </div>
+    <script>
+        var workspace = Blockly.inject('blocklyDiv', {
+            toolbox: document.getElementById('toolbox'),
+            scrollbars: true
+        });
+
+        function generateCode() {
+            var code = Blockly.JavaScript.workspaceToCode(workspace);
+            document.getElementById('codeDiv').innerText = code;
+        }
+
+        function runCode() {
+            var code = Blockly.JavaScript.workspaceToCode(workspace);
+            try {
+                var output = eval(code);
+                document.getElementById('outputDiv').innerText = output;
+            } catch (e) {
+                document.getElementById('outputDiv').innerText = 'Error: ' + e;
+            }
+        }
+
+        function saveBlocks() {
+            var xml = Blockly.Xml.workspaceToDom(workspace);
+            var xmlText = Blockly.Xml.domToPrettyText(xml);
+            var blob = new Blob([xmlText], {type: 'text/xml'});
+            var a = document.createElement('a');
+            a.download = 'blocks.xml';
+            a.href = URL.createObjectURL(blob);
+            a.click();
+        }
+
+        function loadBlocks() {
+            document.getElementById('loadInput').click();
+        }
+
+        function loadBlocksFile(event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var xml = Blockly.utils.xml.textToDom(e.target.result);
+                Blockly.Xml.appendDomToWorkspace(xml, workspace);
+            };
+            reader.readAsText(file);
+        }
+
+    </script>
+</body>
+</html>

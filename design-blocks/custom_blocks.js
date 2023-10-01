@@ -1,59 +1,90 @@
 Blockly.HSV_SATURATION = 1;
 
-// SELECT
+// SELECT - 'select'
 Blockly.Blocks['select'] = {
   init: function() {
-    this.appendValueInput("SELECT")
+    this.appendValueInput('SELECT')
         .appendField('SELECT ')
-        //.setCheck(['input','as','all','membership','agg_min','agg_max','agg_avg','agg_count','agg_sum'])
+        .setCheck(['input','as','all','membership','agg_min','agg_max','agg_avg','agg_count','agg_sum'])
         .appendField(new Blockly.FieldDropdown([
           ['\u0020', 'blank'],
           ['ALL', 'all']
-          ['DISTINCT', 'distinct']]), 'op');
+          ['DISTINCT', 'distinct']]), 'op')
     this.setInputsInline(false);
-    this.setPreviousStatement(true); //add these blocks when created -- do we even need this?
-    this.setNextStatement(true); //add when created
-    this.setOutput(true, 'select');
+    this.setPreviousStatement(false); // would this be true?
+    this.setNextStatement(true, ['FROM']); //add when created
     this.setColour('#53DC9E');
-    this.setTooltip("Your SELECT statement");
+    this.setTooltip('Your SELECT statement');
   }
 };
 
-// USER INPUT 
+// USER INPUT - 'input'
 
-// AS 
+// AS - 'as'
 
-// ALL 
+// ALL - 'all'
 
-// MEMBERSHIP OPERATOR (DOT NOTATION)
+// MEMBERSHIP OPERATOR (DOT NOTATION) - 'membership'
 
-// AGGREGATES (MIN, MAX, AVG, COUNT, SUM)
+// AGGREGATES (MIN, MAX, AVG, COUNT, SUM) - 'agg_min', 'agg_max', 'agg_avg', 'agg_count', 'agg_sum'
 
-//---------------------------
+// FROM - 'from'
+Blockly.Blocks['from'] = {
+  init: function() {
+    this.appendValueInput('FROM')
+        .appendField('FROM ')
+        .setCheck(['table', 'as'])
+    this.setInputsInline(false); 
+    this.setPreviousStatement(true, ['SELECT']); 
+    this.setNextStatement(true, ['WHERE']); 
+    this.setColour('#53DC9E');
+    this.setTooltip('Your FROM statement');
+  }
+};
 
-// FROM
+// TABLE - 'table'
 
-// JOIN
+// JOIN - 'join' 
 
-// WHERE 
+// COMPARISON - 'compare'
 
-// GROUP BY 
+// WHERE - 'where'
+Blockly.Blocks['where'] = {
+  init: function() {
+    this.appendValueInput('WHERE')
+        .setCheck(['input', 'and', 'or', 'compare', 'null', 'between', 'in', 'not'])
+        .appendField('WHERE ')
+    this.setPreviousStatement(true, ['FROM']); 
+    this.setNextStatement(true, ['GROUP BY'])
+    this.setColour('#53DC9E');
+    this.setTooltip('Your WHERE statement');
+  }
+}; 
 
-// HAVING 
+// BETWEEN - 'between'
 
-// ORDER BY 
+// AND - 'and'
+
+// OR - 'or'
+
+// NULL - 'null'
+
+// IN - 'in'
+
+// NOT - 'not'
+
+// GROUP BY - 'groupby'
+
+// HAVING - 'having'
+
+// ORDER BY - 'orderby'
+
+// LIMIT - 'limit' 
 
 
-// and
-// between 
+
+
 // boolean 
-// compare
 // date 
-// in / not in 
-// limit 
 // math 
-// not 
-// null 
 // number 
-// or 
-// table 

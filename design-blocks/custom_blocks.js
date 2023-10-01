@@ -5,7 +5,7 @@ Blockly.Blocks['select'] = {
   init: function() {
     this.appendValueInput("SELECT")
         .appendField('SELECT ')
-        .setCheck(['input','as','all','membership','agg_min','agg_max','agg_avg','agg_count','agg_sum'])
+        //.setCheck(['input','as','all','membership','agg_min','agg_max','agg_avg','agg_count','agg_sum'])
         .appendField(new Blockly.FieldDropdown([
           ['\u0020', 'blank'],
           ['ALL', 'all']
@@ -13,8 +13,9 @@ Blockly.Blocks['select'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true); //add these blocks when created -- do we even need this?
     this.setNextStatement(true); //add when created
+    this.setOutput(true, 'select');
     this.setColour('#53DC9E');
-
+    this.setTooltip("Your SELECT statement");
   }
 };
 

@@ -6,7 +6,7 @@ Blockly.Blocks['SELECT'] = {
         //.setCheck(['input','as','all','membership','agg_min','agg_max','agg_avg','agg_count','agg_sum'])
         .appendField(new Blockly.FieldDropdown([
           ['\u0020', 'blank'],
-          ['ALL', 'all']
+          ['ALL', 'all'],
           ['DISTINCT', 'distinct']]), 'op');
     this.setInputsInline(false);
     this.setPreviousStatement(false); // would this be true?

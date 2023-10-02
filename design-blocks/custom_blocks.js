@@ -7,7 +7,7 @@ Blockly.Blocks['SELECT'] = {
         .appendField(new Blockly.FieldDropdown([
           ['\u0020', 'blank'],
           ['ALL', 'all']
-          ['DISTINCT', 'distinct']]), 'op')
+          ['DISTINCT', 'distinct']]), 'op');
     this.setInputsInline(false);
     this.setPreviousStatement(false); // would this be true?
     this.setNextStatement(true, ['FROM']); //add when created
@@ -30,7 +30,7 @@ Blockly.Blocks['SELECT'] = {
 Blockly.Blocks['FROM'] = {
   init: function() {
     this.appendValueInput('FROM')
-        .appendField('FROM ')
+        .appendField('FROM ');
         //.setCheck(['table', 'as'])
     this.setInputsInline(false); 
     this.setPreviousStatement(true, ['SELECT']); 
@@ -51,7 +51,7 @@ Blockly.Blocks['WHERE'] = {
   init: function() {
     this.appendValueInput('WHERE')
         //.setCheck(['input', 'and', 'or', 'compare', 'null', 'between', 'in', 'not'])
-        .appendField('WHERE ')
+        .appendField('WHERE ');
     this.setPreviousStatement(true, ['FROM']); 
     //this.setNextStatement(true, ['GROUP BY'])
     this.setColour('#53DC9E');

@@ -1,7 +1,7 @@
 Blockly.HSV_SATURATION = 1;
 
 // SELECT - 'select'
-Blockly.Blocks['select'] = {
+Blockly.Blocks['SELECT'] = {
   init: function() {
     this.appendValueInput('SELECT')
         .appendField('SELECT ')
@@ -29,7 +29,7 @@ Blockly.Blocks['select'] = {
 // AGGREGATES (MIN, MAX, AVG, COUNT, SUM) - 'agg_min', 'agg_max', 'agg_avg', 'agg_count', 'agg_sum'
 
 // FROM - 'from'
-Blockly.Blocks['from'] = {
+Blockly.Blocks['FROM'] = {
   init: function() {
     this.appendValueInput('FROM')
         .appendField('FROM ')
@@ -49,7 +49,7 @@ Blockly.Blocks['from'] = {
 // COMPARISON - 'compare'
 
 // WHERE - 'where'
-Blockly.Blocks['where'] = {
+Blockly.Blocks['WHERE'] = {
   init: function() {
     this.appendValueInput('WHERE')
         //.setCheck(['input', 'and', 'or', 'compare', 'null', 'between', 'in', 'not'])
@@ -88,11 +88,3 @@ Blockly.Blocks['where'] = {
 // date 
 // math 
 // number 
-
-
-Blockly.JavaScript.forBlock['select'] = function(block) {
-  var var_name = Blockly.JavaScript.valueToCode(block, 'VAR', Blockly.JavaScript.ORDER_NONE);
-  var expr_code = Blockly.JavaScript.valueToCode(block, 'EXPR', Blockly.JavaScript.ORDER_NONE);
-  var code = '(' + var_name + ' => ' + expr_code + ')';
-  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
-};

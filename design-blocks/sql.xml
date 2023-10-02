@@ -1,8 +1,0 @@
-<xml xmlns="https://developers.google.com/blockly/xml">
-  <block type="select" id="select_block_id1" x="100" y="50">
-    <value name="SELECT" output="true">
-      <block type="input" id="select_block_id2"></block>
-    </value>
-    <field name="op">blank</field>
-  </block>
-</xml>

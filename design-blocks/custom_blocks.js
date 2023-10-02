@@ -1,5 +1,3 @@
-Blockly.HSV_SATURATION = 1;
-
 // SELECT - 'select'
 Blockly.Blocks['SELECT'] = {
   init: function() {

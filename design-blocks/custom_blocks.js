@@ -1,18 +1,32 @@
 // SELECT - 'select'
-Blockly.Blocks['SELECT'] = {
+Blockly.Blocks['SELECT+FROM'] = {
   init: function() {
+
     this.appendValueInput('SELECT')
-        .appendField('SELECT ')
+      .appendField('SELECT ')
         //.setCheck(['input','as','all','membership','agg_min','agg_max','agg_avg','agg_count','agg_sum'])
-        .appendField(new Blockly.FieldDropdown([
-          ['\u0020', 'blank'],
-          ['ALL', 'all'],
-          ['DISTINCT', 'distinct']]), 'op');
+      .appendField(new Blockly.FieldDropdown([
+        ['\u0020', 'blank'],
+        ['ALL', 'all'],
+        ['DISTINCT', 'distinct']]), 'op')
+    
+    this.appendValueInput('FROM')
+      .appendField('FROM ')
+        //.setCheck(['table', 'as'])
+      .appendField(new Blockly.FieldDropdown([
+        ['\u0020', 'blank'],
+        ['ACTOR', 'actor'],
+        ['ADDRESS', 'address'],
+        ['CATEGORY', 'category'],
+        ['CITY', 'city'],
+        ['COUNTRY', 'country']
+      ]));
+
     this.setInputsInline(false);
     this.setPreviousStatement(false); // would this be true?
-    this.setNextStatement(true, ['FROM']); //add when created
+    this.setNextStatement(true, ['WHERE']); //add when created
     this.setColour('#53DC9E');
-    this.setTooltip('Your SELECT statement');
+    this.setTooltip('Your SELECT and FROM statement');
   }
 };
 
@@ -26,19 +40,6 @@ Blockly.Blocks['SELECT'] = {
 
 // AGGREGATES (MIN, MAX, AVG, COUNT, SUM) - 'agg_min', 'agg_max', 'agg_avg', 'agg_count', 'agg_sum'
 
-// FROM - 'from'
-Blockly.Blocks['FROM'] = {
-  init: function() {
-    this.appendValueInput('FROM')
-        .appendField('FROM ');
-        //.setCheck(['table', 'as'])
-    this.setInputsInline(false); 
-    this.setPreviousStatement(true, ['SELECT']); 
-    this.setNextStatement(true, ['WHERE']); 
-    this.setColour('#53DC9E');
-    this.setTooltip('Your FROM statement');
-  }
-};
 
 // TABLE - 'table'
 

@@ -30,8 +30,10 @@ Blockly.Blocks['SELECT+FROM'] = {
 };
 
 Blockly.JavaScript['SELECT+FROM'] = function(block) {
-  var select = Blockly.JavaScript.valueToCode(block, 'SELECT', Blockly.JavaScript.ORDER_NONE);
-  var from = Blockly.JavaScript.valueToCode(block, 'FROM', Blockly.JavaScript.ORDER_NONE);
+  var select = block.getFieldValue('SELECT');
+  //var select = Blockly.JavaScript.valueToCode(block, 'SELECT', Blockly.JavaScript.ORDER_NONE);
+  var from = block.getFieldValue('FROM');
+  //var from = block.JavaScript.getFieldValue(block, 'FROM', Blockly.JavaScript.ORDER_NONE);
   
   // Ensure that the generated code is properly formatted
   var code = 'SELECT' + select + 'FROM' + from + ';';

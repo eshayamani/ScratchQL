@@ -11,8 +11,10 @@
 - These type of queries are usually only done within the SELECT, FROM, and WHERE statements allowing for many complex queries.
 
 ## Data Description
-- The data would be a relational database that we would access through SQL queries. 
-- The database would have to be relational and have the necessary elements but is flexible in terms of the information that is actually being stored because we want our program to apply to all situations. 
+- We will be using the Sakila sample database, which is a database provided by MySQL, for our testing.
+- This database contains 17 tables in a relational database acting as a movie rental store. Some of the included tables are actor, which contains names of actors and an ID, film, which contains the film name and ID, and film_actor which connects an actor ID to a film ID. There are also tables for prices and customer information.
+- Tables in the database will contain both strings and integers that can be output by queries. 
+- In the long run, we would like to be able to use our program for any existing relational database, not just this one. 
 
 ## External Requirements
 - Our code currently doesn't require any external devices

@@ -7,8 +7,8 @@ Blockly.Blocks['SELECT+FROM'] = {
         //.setCheck(['input','as','all','membership','agg_min','agg_max','agg_avg','agg_count','agg_sum'])
       .appendField(new Blockly.FieldDropdown([
         ['\u0020', 'blank'],
-        ['ALL', 'all'],
-        ['DISTINCT', 'distinct']]), 'op');
+        ['ALL', '*'],
+        ['DISTINCT', 'distinct']]), 'SELECT_FIELD');
     
     this.appendValueInput('FROM')
       .appendField('FROM ')
@@ -19,7 +19,7 @@ Blockly.Blocks['SELECT+FROM'] = {
         ['ADDRESS', 'address'],
         ['CATEGORY', 'category'],
         ['CITY', 'city'],
-        ['COUNTRY', 'country']]), 'op');
+        ['COUNTRY', 'country']]), 'FROM_FIELD');
 
     this.setInputsInline(false);
     this.setPreviousStatement(false); // would this be true?
@@ -30,13 +30,13 @@ Blockly.Blocks['SELECT+FROM'] = {
 };
 
 Blockly.JavaScript['SELECT+FROM'] = function(block) {
-  var select = block.getFieldValue('SELECT');
+  var select = block.getFieldValue('SELECT_FIELD');
   //var select = Blockly.JavaScript.valueToCode(block, 'SELECT', Blockly.JavaScript.ORDER_NONE);
-  var from = block.getFieldValue('FROM');
+  var from = block.getFieldValue('FROM_FIELD');
   //var from = block.JavaScript.getFieldValue(block, 'FROM', Blockly.JavaScript.ORDER_NONE);
   
   // Ensure that the generated code is properly formatted
-  var code = 'SELECT ' + select + ' FROM ' + from + ';';
+  var code = 'SELECT ' + select + ' FROM ' + from;
   return code;
 };
 
@@ -76,8 +76,19 @@ Blockly.Blocks['input'] = {
     .appendField(new Blockly.FieldNumber(1, null, null, 1), 'USER_INPUT');
 
       this.setOutput(true, 'var');
+      this.setInputsInline(false);
       this.setColour('#53DC9E');
       this.setTooltip('Enter User Input');
+  }
+};
+
+Blockly.Blocks['NUMBER'] = {
+  init: function() {
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldNumber('1'), 'NUM');
+    this.setOutput(true, 'Number');
+    this.setColour('53DC9E');
+    this.setTooltip(Blockly.Msg.MATH_NUMBER_TOOLTIP);
   }
 };
 
@@ -131,15 +142,28 @@ Blockly.Blocks['WHERE'] = {
 Blockly.Blocks['LIMIT'] = {
   init: function() {
     this.appendValueInput('LIMIT')
-    .appendField('LIMIT')
-    
+        .appendField('LIMIT')
+        .setCheck('Number');
     this.setInputsInline(true);
     this.setPreviousStatement(true, null); 
-    this.setOutput(true, 'input');
+    // this.setOutput(true, 'input');
     this.setColour('#CDB7F6');
     this.setTooltip('Enter Limit');
   }
 };
+
+Blockly.JavaScript['NUMBER'] = function(block) {
+  var numValue = block.getFieldValue('NUM');
+  return numValue;
+};
+
+Blockly.JavaScript['LIMIT'] = function(block) {
+  var limit = Blockly.JavaScript.valueToCode(block, 'LIMIT', Blockly.JavaScript.ORDER_ATOMIC);
+  // Ensure that the generated code is properly formatted
+  var code = ' LIMIT ' + limit;
+  return code;
+};
+
 
 
 

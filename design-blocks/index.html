@@ -14,13 +14,14 @@
         <xml id="toolbox" style="display: none">
             <block type="SELECT+FROM"></block>
             <block type="input"></block>
+            <block type="NUMBER"></block>
             <block type="WHERE"></block>
             <block type="LIMIT"></block>
         </xml>
     </div>
     <div class="row button-row">
-        <button onclick="generateCode()">Generate JavaScript</button>
-        <button onclick="runCode()">Run JavaScript</button>
+        <button onclick="generateCode()">Generate Python</button>
+        <button onclick="runCode()">Run Python</button>
         <button onclick="saveBlocks()">Save Blocks</button>
         <button onclick="loadBlocks()">Load Blocks</button>
         <input type="file" id="loadInput" style="display: none;" onchange="loadBlocksFile(event)">

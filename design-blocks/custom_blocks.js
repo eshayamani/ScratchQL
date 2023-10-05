@@ -23,9 +23,29 @@ Blockly.Blocks['SELECT+FROM'] = {
 
     this.setInputsInline(false);
     this.setPreviousStatement(false); // would this be true?
-    this.setNextStatement(true, ['WHERE']); //add when created
+    this.setNextStatement(true, ['ATTRIBUTE']); //add when created
     this.setColour('#53DC9E');
     this.setTooltip('Your SELECT and FROM statement');
+  }
+};
+
+Blockly.Blocks['ATTRIBUTE'] = {
+  init: function() {
+    this.appendValueInput('ATTRIBUTE')
+      .appendField('ATTRIBUTE')
+      .appendField(new Blockly.FieldDropdown([
+        ['\u0020', 'blank'],
+        ['WHERE', 'where'],
+        ['GROUPBY', 'groupby'],
+        ['HAVING', 'having'],
+        ['ORDERBY', 'orderby'],
+        ['LIMIT', 'limit']]), 'op');
+
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, ['SELECT+FROM']);
+    this.setNextStatement(true, ['ATTRIBUTE']);
+    this.setColour('#8007F2')
+    this.setTooltip('Add an Attribute to the Query');
   }
 };
 

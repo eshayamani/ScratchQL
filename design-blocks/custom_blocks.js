@@ -19,8 +19,7 @@ Blockly.Blocks['SELECT+FROM'] = {
         ['ADDRESS', 'address'],
         ['CATEGORY', 'category'],
         ['CITY', 'city'],
-        ['COUNTRY', 'country']
-      ]));
+        ['COUNTRY', 'country']]), 'op');
 
     this.setInputsInline(false);
     this.setPreviousStatement(false); // would this be true?

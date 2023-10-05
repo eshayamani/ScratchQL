@@ -24,7 +24,7 @@ Blockly.Blocks['SELECT+FROM'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(false); // would this be true?
     this.setNextStatement(true, null); //add when created
-    this.setColour('#53DC9E');
+    this.setColour('#89CFF0');
     this.setTooltip('Your SELECT and FROM statement');
   }
 };
@@ -36,29 +36,29 @@ Blockly.JavaScript['SELECT+FROM'] = function(block) {
   //var from = block.JavaScript.getFieldValue(block, 'FROM', Blockly.JavaScript.ORDER_NONE);
   
   // Ensure that the generated code is properly formatted
-  var code = 'SELECT' + select + 'FROM' + from + ';';
+  var code = 'SELECT ' + select + ' FROM ' + from + ';';
   return code;
 };
 
-Blockly.Blocks['ATTRIBUTE'] = {
-  init: function() {
-    this.appendValueInput('ATTRIBUTE')
-      .appendField('ATTRIBUTE')
-      .appendField(new Blockly.FieldDropdown([
-        ['\u0020', 'blank'],
-        ['WHERE', 'where'],
-        ['GROUPBY', 'groupby'],
-        ['HAVING', 'having'],
-        ['ORDERBY', 'orderby'],
-        ['LIMIT', 'limit']]), 'op');
+// Blockly.Blocks['ATTRIBUTE'] = {
+//   init: function() {
+//     this.appendValueInput('ATTRIBUTE')
+//       .appendField('ATTRIBUTE')
+//       .appendField(new Blockly.FieldDropdown([
+//         ['\u0020', 'blank'],
+//         ['WHERE', 'where'],
+//         ['GROUPBY', 'groupby'],
+//         ['HAVING', 'having'],
+//         ['ORDERBY', 'orderby'],
+//         ['LIMIT', 'limit']]), 'op');
 
-    this.setInputsInline(false);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour('#8007F2')
-    this.setTooltip('Add an Attribute to the Query');
-  }
-};
+//     this.setInputsInline(false);
+//     this.setPreviousStatement(true, null);
+//     this.setNextStatement(true, null);
+//     this.setColour('#8007F2')
+//     this.setTooltip('Add an Attribute to the Query');
+//   }
+// };
 
 // Blockly.JavaScript['ATTRIBUTE'] = function(block) {
 //   var attribute = Blockly.JavaScript.valueToCode(block, 'ATTRIBUTE', Blockly.JavaScript.ORDER_NONE);
@@ -104,7 +104,7 @@ Blockly.Blocks['WHERE'] = {
         .appendField('WHERE ');
     this.setPreviousStatement(true, null); 
     //this.setNextStatement(true, ['GROUP BY'])
-    this.setColour('#53DC9E');
+    this.setColour('#CDB7F6');
     this.setTooltip('Your WHERE statement');
   }
 }; 
@@ -136,7 +136,7 @@ Blockly.Blocks['LIMIT'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true, null); 
     this.setOutput(true, 'input');
-    this.setColour('#53DC9E');
+    this.setColour('#CDB7F6');
     this.setTooltip('Enter Limit');
   }
 };

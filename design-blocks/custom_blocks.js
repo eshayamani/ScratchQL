@@ -67,17 +67,17 @@ Blockly.Blocks['ATTRIBUTE'] = {
 // COMPARISON - 'compare'
 
 // WHERE - 'where'
-// Blockly.Blocks['WHERE'] = {
-//   init: function() {
-//     this.appendValueInput('WHERE')
+Blockly.Blocks['WHERE'] = {
+  init: function() {
+    this.appendValueInput('WHERE')
         //.setCheck(['input', 'and', 'or', 'compare', 'null', 'between', 'in', 'not'])
-    //     .appendField('WHERE ');
-    // this.setPreviousStatement(true, ['SELECT+FROM']); 
+        .appendField('WHERE ');
+    this.setPreviousStatement(true, ['SELECT+FROM']); 
     //this.setNextStatement(true, ['GROUP BY'])
-//     this.setColour('#53DC9E');
-//     this.setTooltip('Your WHERE statement');
-//   }
-// }; 
+    this.setColour('#53DC9E');
+    this.setTooltip('Your WHERE statement');
+  }
+}; 
 
 // BETWEEN - 'between'
 

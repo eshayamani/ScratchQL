@@ -29,6 +29,15 @@ Blockly.Blocks['SELECT+FROM'] = {
   }
 };
 
+Blockly.JavaScript['SELECT+FROM'] = function(block) {
+  var select = Blockly.JavaScript.valueToCode(block, 'SELECT', Blockly.JavaScript.ORDER_NONE);
+  var from = Blockly.JavaScript.valueToCode(block, 'FROM', Blockly.JavaScript.ORDER_NONE);
+  
+  // Ensure that the generated code is properly formatted
+  var code = 'console.log("SELECT ' + select + ' FROM ' + from + '")';
+  return code;
+};
+
 Blockly.Blocks['ATTRIBUTE'] = {
   init: function() {
     this.appendValueInput('ATTRIBUTE')
@@ -47,6 +56,14 @@ Blockly.Blocks['ATTRIBUTE'] = {
     this.setColour('#8007F2')
     this.setTooltip('Add an Attribute to the Query');
   }
+};
+
+Blockly.JavaScript['ATTRIBUTED'] = function(block) {
+  var select = Blockly.JavaScript.valueToCode(block, 'SELECT', Blockly.JavaScript.ORDER_NONE);
+  
+  // Ensure that the generated code is properly formatted
+  var code = 'console.log("SELECT ' + select + ' FROM ' + from + '")';
+  return code;
 };
 
 // USER INPUT - 'input'

@@ -52,7 +52,7 @@ Blockly.Blocks['WHERE'] = {
     this.appendValueInput('WHERE')
         //.setCheck(['input', 'and', 'or', 'compare', 'null', 'between', 'in', 'not'])
         .appendField('WHERE ');
-    this.setPreviousStatement(true, ['FROM']); 
+    this.setPreviousStatement(true, ['SELECT+FROM']); 
     //this.setNextStatement(true, ['GROUP BY'])
     this.setColour('#53DC9E');
     this.setTooltip('Your WHERE statement');

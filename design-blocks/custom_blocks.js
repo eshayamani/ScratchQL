@@ -29,12 +29,12 @@ Blockly.Blocks['SELECT+FROM'] = {
   }
 };
 
-Blockly.JavaScript['SELECT+FROM'] = function(block) {
-  var select = Blockly.JavaScript.valueToCode(block, 'SELECT', Blockly.JavaScript.ORDER_NONE);
-  var from = Blockly.JavaScript.valueToCode(block, 'FROM', Blockly.JavaScript.ORDER_NONE);
+Blockly.Python['SELECT+FROM'] = function(block) {
+  var select = Blockly.Python.valueToCode(block, 'SELECT', Blockly.Python.ORDER_NONE);
+  var from = Blockly.Python.valueToCode(block, 'FROM', Blockly.Python.ORDER_NONE);
   
   // Ensure that the generated code is properly formatted
-  var code = 'console.log("SELECT ' + select + ' FROM ' + from + '")';
+  var code = console.log('SELECT' + select + 'FROM' + from + ';');
   return code;
 };
 
@@ -58,11 +58,11 @@ Blockly.Blocks['ATTRIBUTE'] = {
   }
 };
 
-Blockly.JavaScript['SELECT+FROM'] = function(block) {
-  var select = Blockly.JavaScript.valueToCode(block, 'SELECT', Blockly.JavaScript.ORDER_NONE);
-  var from = Blockly.JavaScript.valueToCode(block, 'FROM', Blockly.JavaScript.ORDER_NONE);
+Blockly.Python['ATTRIBUTE'] = function(block) {
+  var attribute = Blockly.Python.valueToCode(block, 'ATTRIBUTE', Blockly.Python.ORDER_NONE);
+
   // Ensure that the generated code is properly formatted
-  var code = console.log('SELECT ' + select + ' FROM ' + from + ';');
+  var code = console.log('ATTRIBUTE ' + attribute + ';');
   return code;
 };
 

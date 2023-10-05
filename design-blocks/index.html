@@ -35,12 +35,12 @@
         });
 
         function generateCode() {
-            var code = Blockly.JavaScript.workspaceToCode(workspace);
+            var code = Blockly.Python.workspaceToCode(workspace);
             document.getElementById('codeDiv').innerText = code;
         }
 
         function runCode() {
-            var code = Blockly.JavaScript.workspaceToCode(workspace);
+            var code = Blockly.Python.workspaceToCode(workspace);
             try {
                 var output = eval(code);
                 document.getElementById('outputDiv').innerText = output;

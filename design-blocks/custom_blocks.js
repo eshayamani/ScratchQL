@@ -23,7 +23,7 @@ Blockly.Blocks['SELECT+FROM'] = {
 
     this.setInputsInline(false);
     this.setPreviousStatement(false); // would this be true?
-    this.setNextStatement(true, ['ATTRIBUTE']); //add when created
+    this.setNextStatement(true, null); //add when created
     this.setColour('#53DC9E');
     this.setTooltip('Your SELECT and FROM statement');
   }
@@ -51,8 +51,8 @@ Blockly.Blocks['ATTRIBUTE'] = {
         ['LIMIT', 'limit']]), 'op');
 
     this.setInputsInline(false);
-    this.setPreviousStatement(true, ['SELECT+FROM']);
-    this.setNextStatement(true, ['ATTRIBUTE']);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
     this.setColour('#8007F2')
     this.setTooltip('Add an Attribute to the Query');
   }
@@ -89,7 +89,7 @@ Blockly.Blocks['WHERE'] = {
     this.appendValueInput('WHERE')
         //.setCheck(['input', 'and', 'or', 'compare', 'null', 'between', 'in', 'not'])
         .appendField('WHERE ');
-    this.setPreviousStatement(true, ['SELECT+FROM']); 
+    this.setPreviousStatement(true, null); 
     //this.setNextStatement(true, ['GROUP BY'])
     this.setColour('#53DC9E');
     this.setTooltip('Your WHERE statement');

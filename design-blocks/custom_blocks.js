@@ -73,7 +73,7 @@ Blockly.Blocks['input'] = {
   init: function() {
     this.appendValueInput('input')
     .appendField('input:')
-    .appendField(new Blockly.FieldTextInput('text'), 'USER_INPUT');
+    .appendField(new Blockly.FieldNumber(1, null, null, 1), 'USER_INPUT');
 
       this.setOutput(true, 'var');
       this.setColour('#53DC9E');
@@ -134,6 +134,7 @@ Blockly.Blocks['LIMIT'] = {
     .appendField('LIMIT')
     
     this.setInputsInline(true);
+    this.setPreviousStatement(true, null); 
     this.setOutput(true, 'input');
     this.setColour('#53DC9E');
     this.setTooltip('Enter Limit');

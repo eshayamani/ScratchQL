@@ -29,9 +29,9 @@ Blockly.Blocks['SELECT+FROM'] = {
   }
 };
 
-Blockly.Python['SELECT+FROM'] = function(block) {
-  var select = Blockly.Python.valueToCode(block, 'SELECT', Blockly.Python.ORDER_NONE);
-  var from = Blockly.Python.valueToCode(block, 'FROM', Blockly.Python.ORDER_NONE);
+Blockly.JavaScript['SELECT+FROM'] = function(block) {
+  var select = Blockly.JavaScript.valueToCode(block, 'SELECT', Blockly.JavaScript.ORDER_NONE);
+  var from = Blockly.JavaScript.valueToCode(block, 'FROM', Blockly.JavaScript.ORDER_NONE);
   
   // Ensure that the generated code is properly formatted
   var code = console.log('SELECT' + select + 'FROM' + from + ';');
@@ -58,8 +58,8 @@ Blockly.Blocks['ATTRIBUTE'] = {
   }
 };
 
-Blockly.Python['ATTRIBUTE'] = function(block) {
-  var attribute = Blockly.Python.valueToCode(block, 'ATTRIBUTE', Blockly.Python.ORDER_NONE);
+Blockly.JavaScript['ATTRIBUTE'] = function(block) {
+  var attribute = Blockly.JavaScript.valueToCode(block, 'ATTRIBUTE', Blockly.JavaScript.ORDER_NONE);
 
   // Ensure that the generated code is properly formatted
   var code = console.log('ATTRIBUTE ' + attribute + ';');
@@ -67,6 +67,17 @@ Blockly.Python['ATTRIBUTE'] = function(block) {
 };
 
 // USER INPUT - 'input'
+Blockly.Blocks['input'] = {
+  init: function() {
+    this.appendValueInput('input')
+    .appendField('input:')
+    .appendField(new Blockly.FieldTextInput('text'), 'USER_INPUT');
+
+      this.setOutput(true, 'var');
+      this.setColour('#53DC9E');
+      this.setTooltip('Enter User Input');
+  }
+};
 
 // AS - 'as'
 
@@ -115,6 +126,17 @@ Blockly.Blocks['WHERE'] = {
 // ORDER BY - 'orderby'
 
 // LIMIT - 'limit' 
+Blockly.Blocks['LIMIT'] = {
+  init: function() {
+    this.appendValueInput('LIMIT')
+    .appendField('LIMIT')
+    
+    this.setInputsInline(true);
+    this.setOutput(true, 'input');
+    this.setColour('#53DC9E');
+    this.setTooltip('Enter Limit');
+  }
+};
 
 
 

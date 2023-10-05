@@ -58,13 +58,13 @@ Blockly.Blocks['ATTRIBUTE'] = {
   }
 };
 
-Blockly.JavaScript['ATTRIBUTE'] = function(block) {
-  var attribute = Blockly.JavaScript.valueToCode(block, 'ATTRIBUTE', Blockly.JavaScript.ORDER_NONE);
+// Blockly.JavaScript['ATTRIBUTE'] = function(block) {
+//   var attribute = Blockly.JavaScript.valueToCode(block, 'ATTRIBUTE', Blockly.JavaScript.ORDER_NONE);
 
-  // Ensure that the generated code is properly formatted
-  var code = console.log('ATTRIBUTE ' + attribute + ';');
-  return code;
-};
+//   // Ensure that the generated code is properly formatted
+//   var code = console.log('ATTRIBUTE ' + attribute + ';');
+//   return code;
+// };
 
 // USER INPUT - 'input'
 Blockly.Blocks['input'] = {

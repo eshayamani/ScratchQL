@@ -34,7 +34,7 @@ Blockly.JavaScript['SELECT+FROM'] = function(block) {
   var from = Blockly.JavaScript.valueToCode(block, 'FROM', Blockly.JavaScript.ORDER_NONE);
   
   // Ensure that the generated code is properly formatted
-  var code = console.log('SELECT' + select + 'FROM' + from + ';');
+  var code = 'SELECT' + select + 'FROM' + from + ';';
   return code;
 };
 

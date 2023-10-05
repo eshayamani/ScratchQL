@@ -8,7 +8,7 @@ Blockly.Blocks['SELECT+FROM'] = {
       .appendField(new Blockly.FieldDropdown([
         ['\u0020', 'blank'],
         ['ALL', 'all'],
-        ['DISTINCT', 'distinct']]), 'op')
+        ['DISTINCT', 'distinct']]), 'op');
     
     this.appendValueInput('FROM')
       .appendField('FROM ')

@@ -40,34 +40,6 @@ Blockly.JavaScript['SELECT+FROM'] = function(block) {
   return code;
 };
 
-// Blockly.Blocks['ATTRIBUTE'] = {
-//   init: function() {
-//     this.appendValueInput('ATTRIBUTE')
-//       .appendField('ATTRIBUTE')
-//       .appendField(new Blockly.FieldDropdown([
-//         ['\u0020', 'blank'],
-//         ['WHERE', 'where'],
-//         ['GROUPBY', 'groupby'],
-//         ['HAVING', 'having'],
-//         ['ORDERBY', 'orderby'],
-//         ['LIMIT', 'limit']]), 'op');
-
-//     this.setInputsInline(false);
-//     this.setPreviousStatement(true, null);
-//     this.setNextStatement(true, null);
-//     this.setColour('#8007F2')
-//     this.setTooltip('Add an Attribute to the Query');
-//   }
-// };
-
-// Blockly.JavaScript['ATTRIBUTE'] = function(block) {
-//   var attribute = Blockly.JavaScript.valueToCode(block, 'ATTRIBUTE', Blockly.JavaScript.ORDER_NONE);
-
-//   // Ensure that the generated code is properly formatted
-//   var code = console.log('ATTRIBUTE ' + attribute + ';');
-//   return code;
-// };
-
 // USER INPUT - 'input'
 Blockly.Blocks['INPUT'] = {
   init: function() {
@@ -79,6 +51,11 @@ Blockly.Blocks['INPUT'] = {
       this.setColour('#FFB3C6');
       this.setTooltip('Enter User Input');
   }
+};
+
+Blockly.JavaScript['INPUT'] = function(block) {
+  var input = block.getFieldValue('USER_INPUT');
+  return [input, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
 Blockly.Blocks['NUMBER'] = {
@@ -123,17 +100,27 @@ Blockly.Blocks['COMPARE'] = {
         .setCheck(['Number', 'var', 'exp']);
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([
-            ['=', 'EQUAL'],
-            ['>', 'GREATER'],
-            ['<', 'LESS'],
-            ['>=', 'GREATER_EQUAL'],
-            ['<=', 'LESS_EQUAL']]), 'compare');
+            ['=', '='],
+            ['>', '>'],
+            ['<', '<'],
+            ['>=', '>='],
+            ['<=', '<=']]), 'compare');
     this.appendValueInput('B')
         .setCheck(['Number', 'var', 'exp']);
     this.setInputsInline(true);
     this.setColour('#A0C4FF');
     this.setTooltip(Blockly.Msg.MATH_ARITHMETIC_TOOLTIP);
   }
+};
+
+Blockly.JavaScript['COMPARE'] = function(block) {
+  var A = Blockly.JavaScript.valueToCode(block, 'A', Blockly.JavaScript.ORDER_ATOMIC);
+  var B = Blockly.JavaScript.valueToCode(block, 'B', Blockly.JavaScript.ORDER_ATOMIC);
+  var operator = block.getFieldValue('compare')
+
+  // Ensure that the generated code is properly formatted
+  var code = A + ' ' + operator + ' ' + B;
+  return code;
 };
 
 // WHERE - 'where'
@@ -148,6 +135,13 @@ Blockly.Blocks['WHERE'] = {
     this.setTooltip('Your WHERE statement');
   }
 }; 
+
+Blockly.JavaScript['WHERE'] = function(block) {
+  var where = Blockly.JavaScript.statementToCode(block, 'WHERE', Blockly.JavaScript.ORDER_NONE);
+  // Ensure that the generated code is properly formatted
+  var code = ' WHERE ' + where;
+  return code;
+};
 
 // BETWEEN - 'between'
 
@@ -181,7 +175,6 @@ Blockly.Blocks['LIMIT'] = {
     this.setTooltip('Enter Limit');
   }
 };
-
 
 Blockly.JavaScript['LIMIT'] = function(block) {
   var limit = Blockly.JavaScript.valueToCode(block, 'LIMIT', Blockly.JavaScript.ORDER_ATOMIC);

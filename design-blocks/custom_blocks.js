@@ -69,15 +69,14 @@ Blockly.JavaScript['SELECT+FROM'] = function(block) {
 // };
 
 // USER INPUT - 'input'
-Blockly.Blocks['input'] = {
+Blockly.Blocks['INPUT'] = {
   init: function() {
-    this.appendValueInput('input')
-    .appendField('input:')
-    .appendField(new Blockly.FieldNumber(1, null, null, 1), 'USER_INPUT');
+    this.appendValueInput('INPUT')
+    .appendField(new Blockly.FieldTextInput('text'), 'USER_INPUT');
 
       this.setOutput(true, 'var');
       this.setInputsInline(false);
-      this.setColour('#53DC9E');
+      this.setColour('#FFB3C6');
       this.setTooltip('Enter User Input');
   }
 };
@@ -87,7 +86,7 @@ Blockly.Blocks['NUMBER'] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldNumber('1'), 'NUM');
     this.setOutput(true, 'Number');
-    this.setColour('53DC9E');
+    this.setColour('#FFB3C6');
     this.setTooltip(Blockly.Msg.MATH_NUMBER_TOOLTIP);
   }
 };
@@ -111,6 +110,31 @@ Blockly.JavaScript['NUMBER'] = function(block) {
 // JOIN - 'join' 
 
 // COMPARISON - 'compare'
+Blockly.Blocks['COMPARE'] = {
+  /**
+   * Block for arithmetic operations.
+   * @this {Blockly.Block}
+   */
+  init: function() {
+    this.setHelpUrl(Blockly.Msg.MATH_ARITHMETIC_HELPURL);
+    this.setColour(Blockly.Msg.MATH_HUE);
+    this.setOutput(true, 'Number');
+    this.appendValueInput('A')
+        .setCheck(['Number', 'var', 'exp']);
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([
+            ['=', 'EQUAL'],
+            ['>', 'GREATER'],
+            ['<', 'LESS'],
+            ['>=', 'GREATER_EQUAL'],
+            ['<=', 'LESS_EQUAL']]), 'compare');
+    this.appendValueInput('B')
+        .setCheck(['Number', 'var', 'exp']);
+    this.setInputsInline(true);
+    this.setColour('#A0C4FF');
+    this.setTooltip(Blockly.Msg.MATH_ARITHMETIC_TOOLTIP);
+  }
+};
 
 // WHERE - 'where'
 Blockly.Blocks['WHERE'] = {
@@ -119,7 +143,7 @@ Blockly.Blocks['WHERE'] = {
         //.setCheck(['input', 'and', 'or', 'compare', 'null', 'between', 'in', 'not'])
         .appendField('WHERE ');
     this.setPreviousStatement(true, null); 
-    //this.setNextStatement(true, ['GROUP BY'])
+    this.setNextStatement(true, null);
     this.setColour('#CDB7F6');
     this.setTooltip('Your WHERE statement');
   }
@@ -172,7 +196,7 @@ Blockly.Blocks['END'] = {
         .appendField('END');
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
-    this.setColour('#CDB7F6');
+    this.setColour('#FF9997');
     this.setTooltip('Put at the End of Query');
   }
 };

@@ -92,6 +92,11 @@ Blockly.Blocks['NUMBER'] = {
   }
 };
 
+Blockly.JavaScript['NUMBER'] = function(block) {
+  var numValue = block.getFieldValue('NUM');
+  return [numValue, Blockly.JavaScript.ORDER_ATOMIC];
+};
+
 // AS - 'as'
 
 // ALL - 'all'
@@ -146,16 +151,13 @@ Blockly.Blocks['LIMIT'] = {
         .setCheck('Number');
     this.setInputsInline(true);
     this.setPreviousStatement(true, null); 
+    this.setNextStatement(true, null)
     // this.setOutput(true, 'input');
     this.setColour('#CDB7F6');
     this.setTooltip('Enter Limit');
   }
 };
 
-Blockly.JavaScript['NUMBER'] = function(block) {
-  var numValue = block.getFieldValue('NUM');
-  return numValue;
-};
 
 Blockly.JavaScript['LIMIT'] = function(block) {
   var limit = Blockly.JavaScript.valueToCode(block, 'LIMIT', Blockly.JavaScript.ORDER_ATOMIC);
@@ -164,6 +166,21 @@ Blockly.JavaScript['LIMIT'] = function(block) {
   return code;
 };
 
+Blockly.Blocks['END'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField('END');
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setColour('#CDB7F6');
+    this.setTooltip('Put at the End of Query');
+  }
+};
+
+Blockly.JavaScript['END'] = function(block) {
+  code = ';'
+  return code;
+}
 
 
 

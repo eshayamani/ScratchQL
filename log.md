@@ -19,3 +19,7 @@
 ## Disclaimer
 - We call and work on it every weekend through screen sharing so there isn't a lot of proper work division but this way works for us.
 - This helps us bounce ideas off of each other and work on the code together as it's easier for us this way.
+
+## Use of AI
+- We are currently not using any form of AI other than code generation debugging with chatGPT
+- We might need some in the future when we try to run the queries on the page itself

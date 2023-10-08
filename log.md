@@ -1,13 +1,20 @@
 ## Work Division
 - Sophia Guarnotta
-    - Worked on design files for submissions
-    - Worked on code generation for queries
+    - [Design Files](design2.md)
+        - Worked on design files for submissions
+    - [Code for Blocks](milestone1/custom_blocks.js)
+        - Worked on code generation for queries
 - Esha Yamani
-    - Continued code set up and worked on WHERE, LIMIT, COMPARE, and input blocks
-    - Worked on code generation for queries
+    - [Code for Blocks](milestone1/custom_blocks.js)
+        - Continued code set up and worked on WHERE, LIMIT, COMPARE, and input blocks
+        - Worked on code generation for queries
+    - [Demo Video](milestone1/Demo1.mp4)
+        - Recorded demo video for milestone 1
 - Ponthea Zahraii
-    - Initial code set up that include basic SELECT, FROM, and WHERE blocks
-    - Worked on getting the blocks on the git hub page
+    - [Code for Blocks](milestone1/custom_blocks.js)
+        - Initial code set up that include basic SELECT, FROM, and WHERE blocks
+    - [html file](milestone1/index.html)
+        - Worked on getting the blocks on the git hub page
 
 ## Disclaimer
 - We call and work on it every weekend through screen sharing so there isn't a lot of proper work division but this way works for us.

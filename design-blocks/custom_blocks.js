@@ -6,7 +6,7 @@ Blockly.Blocks['SELECT+FROM'] = {
       .appendField('SELECT ')
         //.setCheck(['input','as','all','membership','agg_min','agg_max','agg_avg','agg_count','agg_sum'])
       .appendField(new Blockly.FieldDropdown([
-        ['\u0020', 'blank'],
+        ['\u0020', ''],
         ['ALL', '*'],
         ['DISTINCT', 'distinct']]), 'SELECT_FIELD');
     
@@ -24,6 +24,7 @@ Blockly.Blocks['SELECT+FROM'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(false); // would this be true?
     this.setNextStatement(true, null); //add when created
+    this.setOutput(true) //for recursive purposes
     this.setColour('#89CFF0');
     this.setTooltip('Your SELECT and FROM statement');
   }
@@ -183,21 +184,21 @@ Blockly.JavaScript['LIMIT'] = function(block) {
   return code;
 };
 
-Blockly.Blocks['END'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField('END');
-    this.setInputsInline(false);
-    this.setPreviousStatement(true, null);
-    this.setColour('#FF9997');
-    this.setTooltip('Put at the End of Query');
-  }
-};
+// Blockly.Blocks['END'] = {
+//   init: function() {
+//     this.appendDummyInput()
+//         .appendField('END');
+//     this.setInputsInline(false);
+//     this.setPreviousStatement(true, null);
+//     this.setColour('#FF9997');
+//     this.setTooltip('Put at the End of Query');
+//   }
+// };
 
-Blockly.JavaScript['END'] = function(block) {
-  code = ';'
-  return code;
-}
+// Blockly.JavaScript['END'] = function(block) {
+//   code = ';'
+//   return code;
+// }
 
 
 

@@ -1,7 +1,6 @@
 ## Work Division
 - Sophia Guarnotta
     - Worked on design files for submissions
-    - SQL interface links
     - Worked on code generation for queries
 - Esha Yamani
     - Continued code set up and worked on WHERE, LIMIT, COMPARE, and input blocks

@@ -39,7 +39,7 @@ Blockly.JavaScript['SELECT+FROM'] = function(block) {
   // from dropdown
   var from = block.getFieldValue('FROM_FIELD');
 
-  var code = 'SELECT ' + select + text + ' FROM ' + from;
+  var code = 'SELECT ' + select + ' FROM ' + from;
   return code;
 };
 

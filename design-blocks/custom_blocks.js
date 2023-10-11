@@ -5,11 +5,11 @@ Blockly.Blocks['SELECT+FROM'] = {
     // SELECT statement with dropdown menu
     this.appendValueInput('SELECT')
       .appendField('SELECT ')
-        //.setCheck(['input','as','all','membership','agg_min','agg_max','agg_avg','agg_count','agg_sum'])
       .appendField(new Blockly.FieldDropdown([
         ['\u0020', ''],
         ['ALL', '*'],
-        ['DISTINCT', 'distinct']]), 'SELECT_FIELD');
+        ['DISTINCT', 'distinct']]), 'SELECT_FIELD')
+        .appendField(new Blockly.FieldTextInput(''), 'SELECT_TEXT');
     
     // FROM statement with dropdown menu of table names
     this.appendValueInput('FROM')
@@ -36,10 +36,12 @@ Blockly.Blocks['SELECT+FROM'] = {
 Blockly.JavaScript['SELECT+FROM'] = function(block) {
   // select dropdown
   var select = block.getFieldValue('SELECT_FIELD');
+  // select text block
+  var text = block.getFieldValue('SELECT_TEXT');
   // from dropdown
   var from = block.getFieldValue('FROM_FIELD');
 
-  var code = 'SELECT ' + select + ' FROM ' + from;
+  var code = 'SELECT ' + select + text + ' FROM ' + from;
   return code;
 };
 

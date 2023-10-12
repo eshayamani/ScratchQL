@@ -8,7 +8,7 @@ Blockly.Blocks['SELECT+FROM'] = {
       .appendField(new Blockly.FieldDropdown([
         ['\u0020', ''],
         ['ALL', '*'],
-        ['DISTINCT', 'distinct']]), 'SELECT_FIELD')
+        ['DISTINCT', 'DISTINCT']]), 'SELECT_FIELD')
         .appendField(new Blockly.FieldTextInput(''), 'SELECT_TEXT');
     
     // FROM statement with dropdown menu of table names
@@ -91,8 +91,34 @@ Blockly.JavaScript['NUMBER'] = function(block) {
 
 // MEMBERSHIP OPERATOR (DOT NOTATION) - 'membership'
 
-// AGGREGATES (MIN, MAX, AVG, COUNT, SUM) - 'agg_min', 'agg_max', 'agg_avg', 'agg_count', 'agg_sum'
+// AGGREGATES - 'aggregate'
+// (MIN, MAX, AVG, COUNT, SUM) - 'agg_min', 'agg_max', 'agg_avg', 'agg_count', 'agg_sum'
+Blockly.Blocks['AGGREGATE'] = {
+  init: function() {
+    this.appendValueInput('AGGREGATE')
+        .appendField('AGG')
+        .appendField(new Blockly.FieldDropdown([
+          ['\u0020',''],
+          ['MIN', 'MIN'],
+          ['MAX', 'MAX'],
+          ['AVG', 'AVG'],
+          ['COUNT', 'COUNT'],
+          ['SUM', 'SUM']]), 'AGG');
+    this.setInputsInline(false);
+    this.setOutput(true, 'var');
+    this.setColour('#A0C4FF');
+    this.setTooltip('Pick an Aggregate');
+  }
+};
 
+// generate code block for AGGREGATE
+Blockly.JavaScript['AGGREGATE'] = function(block) {
+  // select dropdown
+  var agg = block.getFieldValue('AGG');
+
+  var code = agg;
+  return code;
+};
 
 // TABLE - 'table'
 

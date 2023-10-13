@@ -241,7 +241,7 @@ Blockly.Blocks['GROUPBY'] = {
 
 // generate code for group by block
 Blockly.JavaScript['GROUPBY'] = function(block) {
-  // get value of input such as a number
+  // get value of group by variable
   var group = Blockly.JavaScript.valueToCode(block, 'GROUPBY', Blockly.JavaScript.ORDER_ATOMIC);
   var code = ' GROUP BY ' + group;
   return code;
@@ -250,6 +250,35 @@ Blockly.JavaScript['GROUPBY'] = function(block) {
 // HAVING - 'having'
 
 // ORDER BY - 'orderby'
+Blockly.Blocks['ORDERBY'] = {
+  init: function() {
+    this.appendValueInput('ORDERBY')
+        .appendField('ORDER BY')
+        // get order by variable
+        .setCheck('var');
+        this.appendDummyInput()
+        // check for asc or desc requirements
+        .appendField(new Blockly.FieldDropdown([
+          ['\u0020', 'blank'],
+          ['ASC', 'ASC'],
+          ['DESC', 'DESC']]), 'order');
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null); 
+    this.setNextStatement(true, null)
+    this.setColour('#CDB7F6');
+    this.setTooltip('Enter Order By variable');
+  }
+};
+
+// generate code for group by block
+Blockly.JavaScript['ORDERBY'] = function(block) {
+  // get value of order by variable
+  var group = Blockly.JavaScript.valueToCode(block, 'ORDERBY', Blockly.JavaScript.ORDER_ATOMIC);
+  // get asc or desc value
+  var order = block.getFieldValue('order')
+  var code = ' ORDER BY ' + group + ' ' + order;
+  return code;
+};
 
 // LIMIT - 'limit' 
 Blockly.Blocks['LIMIT'] = {

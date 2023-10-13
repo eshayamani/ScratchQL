@@ -5,11 +5,12 @@ Blockly.Blocks['SELECT+FROM'] = {
     // SELECT statement with dropdown menu
     this.appendValueInput('SELECT')
       .appendField('SELECT ')
+      .setCheck(['var','AGGREGATE'])
       .appendField(new Blockly.FieldDropdown([
         ['\u0020', ''],
         ['ALL', '*'],
         ['DISTINCT', 'DISTINCT']]), 'SELECT_FIELD')
-        .appendField(new Blockly.FieldTextInput(''), 'SELECT_TEXT');
+        //.appendField(new Blockly.FieldTextInput(''), 'SELECT_TEXT');
     
     // FROM statement with dropdown menu of table names
     this.appendValueInput('FROM')
@@ -36,12 +37,12 @@ Blockly.Blocks['SELECT+FROM'] = {
 Blockly.JavaScript['SELECT+FROM'] = function(block) {
   // select dropdown
   var select = block.getFieldValue('SELECT_FIELD');
-  // select text block
-  var text = block.getFieldValue('SELECT_TEXT');
+  // add any text from input blocks
+  var input = Blockly.JavaScript.valueToCode(block, 'SELECT', Blockly.JavaScript.ORDER_NONE);
   // from dropdown
   var from = block.getFieldValue('FROM_FIELD');
 
-  var code = 'SELECT ' + select + text + ' FROM ' + from;
+  var code = 'SELECT ' + select + input + ' FROM ' + from;
   return code;
 };
 
@@ -173,7 +174,8 @@ Blockly.JavaScript['COMPARE'] = function(block) {
 Blockly.Blocks['WHERE'] = {
   init: function() {
     this.appendValueInput('WHERE')
-        .appendField('WHERE ');
+        .appendField('WHERE ')
+        .setCheck(['var','Number','exp']);
     // can be connected anywhere to anything
     this.setPreviousStatement(true, null); 
     this.setNextStatement(true, null);
@@ -184,10 +186,24 @@ Blockly.Blocks['WHERE'] = {
 
 // generate code for where block
 Blockly.JavaScript['WHERE'] = function(block) {
-  // from compare block connected to where
-  var where = Blockly.JavaScript.statementToCode(block, 'WHERE', Blockly.JavaScript.ORDER_NONE);
+  // get type of connected block
+  var connectedBlock = block.getInputTargetBlock('WHERE');
+  // check if its for compare
+  if (connectedBlock && connectedBlock.type === 'COMPARE') {
+    // use statement to code
+    var where = Blockly.JavaScript.statementToCode(block, 'WHERE', Blockly.JavaScript.ORDER_NONE);
+    var code = ' WHERE ' + where;
+  } // check if its for input
+  else if (connectedBlock.type === 'INPUT') {
+    // use value to code
+    var where = Blockly.JavaScript.valueToCode(block, 'WHERE', Blockly.JavaScript.ORDER_NONE);
+    var code = ' WHERE ' + where;
+  }
+  else { // default case
+    // this aint printing
+    var code = 'WHERE';
+  }
   
-  var code = ' WHERE ' + where;
   return code;
 };
 

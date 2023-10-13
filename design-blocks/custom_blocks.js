@@ -22,7 +22,9 @@ Blockly.Blocks['SELECT+FROM'] = {
         ['ADDRESS', 'address'],
         ['CATEGORY', 'category'],
         ['CITY', 'city'],
-        ['COUNTRY', 'country']]), 'FROM_FIELD');
+        ['COUNTRY', 'country'],
+        ['CUSTOMER', 'customer'],
+        ['FILM', 'film']]), 'FROM_FIELD');
 
     this.setInputsInline(false);
     this.setPreviousStatement(false); // no previoud
@@ -38,7 +40,7 @@ Blockly.JavaScript['SELECT+FROM'] = function(block) {
   // select dropdown
   var select = block.getFieldValue('SELECT_FIELD');
   // add any text from input blocks
-  var input = Blockly.JavaScript.valueToCode(block, 'SELECT', Blockly.JavaScript.ORDER_NONE);
+  var input = Blockly.JavaScript.statementToCode(block, 'SELECT', Blockly.JavaScript.ORDER_ATOMIC);
   // from dropdown
   var from = block.getFieldValue('FROM_FIELD');
 
@@ -104,8 +106,9 @@ Blockly.Blocks['AGGREGATE'] = {
           ['MAX', 'MAX'],
           ['AVG', 'AVG'],
           ['COUNT', 'COUNT'],
-          ['SUM', 'SUM']]), 'AGG');
-    this.setInputsInline(false);
+          ['SUM', 'SUM']]), 'AGG')
+        .setCheck(['Number', 'var', 'exp']);
+    this.setInputsInline(true);
     this.setOutput(true, 'var');
     this.setColour('#A0C4FF');
     this.setTooltip('Pick an Aggregate');
@@ -116,8 +119,10 @@ Blockly.Blocks['AGGREGATE'] = {
 Blockly.JavaScript['AGGREGATE'] = function(block) {
   // select dropdown
   var agg = block.getFieldValue('AGG');
-
-  var code = agg;
+  // get text from input block
+  var input = Blockly.JavaScript.valueToCode(block, 'AGGREGATE', Blockly.JavaScript.ORDER_ATOMIC);
+  // format for queries
+  var code = agg + '(' + input + ')';
   return code;
 };
 

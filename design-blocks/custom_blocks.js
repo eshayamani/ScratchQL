@@ -225,6 +225,27 @@ Blockly.JavaScript['WHERE'] = function(block) {
 // NOT - 'not'
 
 // GROUP BY - 'groupby'
+Blockly.Blocks['GROUPBY'] = {
+  init: function() {
+    this.appendValueInput('GROUPBY')
+        .appendField('GROUP BY')
+        // get group by variable
+        .setCheck('var');
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null); 
+    this.setNextStatement(true, null)
+    this.setColour('#CDB7F6');
+    this.setTooltip('Enter Group By variable');
+  }
+};
+
+// generate code for group by block
+Blockly.JavaScript['GROUPBY'] = function(block) {
+  // get value of input such as a number
+  var group = Blockly.JavaScript.valueToCode(block, 'GROUPBY', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = ' GROUP BY ' + group;
+  return code;
+};
 
 // HAVING - 'having'
 
@@ -250,7 +271,6 @@ Blockly.Blocks['LIMIT'] = {
 Blockly.JavaScript['LIMIT'] = function(block) {
   // get value of input such as a number
   var limit = Blockly.JavaScript.valueToCode(block, 'LIMIT', Blockly.JavaScript.ORDER_ATOMIC);
-
   var code = ' LIMIT ' + limit;
   return code;
 };

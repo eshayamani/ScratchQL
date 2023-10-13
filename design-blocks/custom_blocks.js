@@ -10,7 +10,7 @@ Blockly.Blocks['SELECT+FROM'] = {
         ['\u0020', ''],
         ['ALL', '*'],
         ['DISTINCT', 'DISTINCT']]), 'SELECT_FIELD')
-        //.appendField(new Blockly.FieldTextInput(''), 'SELECT_TEXT');
+        .appendField(new Blockly.FieldTextInput(''), 'SELECT_TEXT');
     
     // FROM statement with dropdown menu of table names
     this.appendValueInput('FROM')
@@ -39,12 +39,14 @@ Blockly.Blocks['SELECT+FROM'] = {
 Blockly.JavaScript['SELECT+FROM'] = function(block) {
   // select dropdown
   var select = block.getFieldValue('SELECT_FIELD');
+  // add in line select text
+  var text = (block.getFieldValue('SELECT_TEXT')) + ',';
   // add any text from input blocks
   var input = Blockly.JavaScript.statementToCode(block, 'SELECT', Blockly.JavaScript.ORDER_ATOMIC);
   // from dropdown
   var from = block.getFieldValue('FROM_FIELD');
 
-  var code = 'SELECT ' + select + input + ' FROM ' + from;
+  var code = 'SELECT ' + select + text + input + ' FROM ' + from;
   return code;
 };
 
@@ -303,19 +305,3 @@ Blockly.JavaScript['LIMIT'] = function(block) {
   var code = ' LIMIT ' + limit;
   return code;
 };
-
-// Blockly.Blocks['END'] = {
-//   init: function() {
-//     this.appendDummyInput()
-//         .appendField('END');
-//     this.setInputsInline(false);
-//     this.setPreviousStatement(true, null);
-//     this.setColour('#FF9997');
-//     this.setTooltip('Put at the End of Query');
-//   }
-// };
-
-// Blockly.JavaScript['END'] = function(block) {
-//   code = ';'
-//   return code;
-// }

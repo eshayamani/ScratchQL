@@ -40,7 +40,7 @@ Blockly.JavaScript['SELECT+FROM'] = function(block) {
   // select dropdown
   var select = block.getFieldValue('SELECT_FIELD');
   // add in line select text
-  var text = (block.getFieldValue('SELECT_TEXT')) + ',';
+  var text = (block.getFieldValue('SELECT_TEXT'));
   // add any text from input blocks
   var input = Blockly.JavaScript.statementToCode(block, 'SELECT', Blockly.JavaScript.ORDER_ATOMIC);
   // from dropdown

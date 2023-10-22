@@ -291,7 +291,7 @@ Blockly.Blocks['LIMIT'] = {
         .setCheck('Number');
     this.setInputsInline(true);
     this.setPreviousStatement(true, null); 
-    this.setNextStatement(true, null)
+    this.setNextStatement(false, null);
     // this.setOutput(true, 'input');
     this.setColour('#CDB7F6');
     this.setTooltip('Enter Limit');
@@ -305,3 +305,27 @@ Blockly.JavaScript['LIMIT'] = function(block) {
   var code = ' LIMIT ' + limit;
   return code;
 };
+
+// Connection block with two inputs
+Blockly.Blocks['CONNECTION'] = {
+  init: function() {
+    this.appendValueInput('CONNECTION')
+        .setCheck()
+        .appendField("DATABASE PATH");
+    this.appendValueInput('SQL_BLOCK')
+        .setCheck(null)
+        .appendField("QUERY");
+
+    this.setColour('#CC1100');
+    this.setTooltip('Connect to an SQLite database with SQL query');
+  }
+};
+
+// Generate JavaScript code for the SQLite connection block
+Blockly.JavaScript['CONNECTION'] = function(block) {
+  var dbPath = Blockly.JavaScript.valueToCode(block, 'CONNECTION', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'var sqlite3 = require("sqlite3").verbose();\n';
+  code += 'var db = new sqlite3.Database(' + dbPath + ');\n';
+  return code;
+};
+

@@ -1,3 +1,65 @@
+const tableColumns = {
+  'actor': ['actor_id', 'first_name', 'last_name', 'last_update'],
+  'address': ['address_id', 'address', 'address2', 'district', 'city_id', 'postal_code', 'phone', 'last_update'],
+  'category': ['category_id', 'name', 'last_update'],
+  'city': ['city_id', 'city', 'country_id', 'last_update'],
+  'country': ['country_id', 'country', 'last_update'],
+  'customer': ['customer_id', 'store_id', 'first_name', 'last_name', 'email', 'address_id', 'active', 'create_date', 'last_update'],
+  'film': ['film_id', 'title', 'description', 'release_year', 'language_id', 'original_language_id', 'rental_duration', 'rental_rate', 'length', 'replacement_cost', 'rating', 'special_features', 'last_update'],
+  'film_actor': ['actor_id', 'film_id', 'last_update'],
+  'film_category': ['film_id', 'category_id', 'last_update'],
+  'film_text': ['film_id', 'title', 'description'],
+  'inventory': ['inventory_id', 'film_id', 'store_id', 'last_update'],
+  'language': ['language_id', 'name', 'last_update'],
+  'payment': ['payment_id', 'customer_id', 'staff_id', 'rental_id', 'amount', 'payment_date', 'last_update'],
+  'rental': ['rental_id', 'rental_date', 'inventory_id', 'customer_id', 'return_date', 'staff_id', 'last_update'],
+  'staff': ['staff_id', 'first_name', 'last_name', 'address_id', 'picture', 'email', 'store_id', 'active', 'username', 'password', 'last_update'],
+  'store': ['store_id', 'manager_staff_id', 'address_id', 'last_update'],
+}
+
+Blockly.Blocks['VAR'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField('Table:')
+        .appendField(new Blockly.FieldDropdown(this.populateTables.bind(this)), 'TABLES');
+
+    this.appendDummyInput('COLUMN_SELECTOR')
+        .appendField('Variable:')
+        .appendField(new Blockly.FieldDropdown([['Select a table first', '']]), 'COLUMNS');
+
+    this.setColour('#FFAB91');
+    this.setTooltip('Select a column from a table');
+    this.setOutput(true, 'VAR');
+  },
+
+  populateTables: function() {
+    return Object.keys(tableColumns).map(table => [table, table]);
+  },
+
+  onchange: function(changeEvent) {
+    if (changeEvent.element === 'field' && changeEvent.name === 'TABLES') {
+      this.updateColumnsDropdown(changeEvent.newValue);
+    }
+  },
+
+  updateColumnsDropdown: function(selectedTable) {
+    if (tableColumns[selectedTable]) {
+      this.getInput('COLUMN_SELECTOR').removeField('COLUMNS');
+      this.getInput('COLUMN_SELECTOR').appendField(new Blockly.FieldDropdown(tableColumns[selectedTable].map(col => [col, col])), 'COLUMNS');
+    } else {
+      this.getInput('COLUMN_SELECTOR').removeField('COLUMNS');
+      this.getInput('COLUMN_SELECTOR').appendField(new Blockly.FieldDropdown([['Select a table first', '']]), 'COLUMNS');
+    }
+  }
+
+};
+
+Blockly.JavaScript['VAR'] = function(block) {
+  var column = block.getFieldValue('COLUMNS');
+  var code = column;
+  return [code, Blockly.JavaScript.ORDER_ATOMIC]; // Returns a tuple
+};
+
 // SELECT and FROM 'select+from'
 // first block of a query
 Blockly.Blocks['SELECT+FROM'] = {
@@ -5,7 +67,7 @@ Blockly.Blocks['SELECT+FROM'] = {
     // SELECT statement with dropdown menu
     this.appendValueInput('SELECT')
       .appendField('SELECT ')
-      .setCheck(['var','AGGREGATE'])
+      .setCheck(['VAR', 'var','AGGREGATE'])
       .appendField(new Blockly.FieldDropdown([
         ['\u0020', ''],
         ['ALL', '*'],
@@ -37,13 +99,9 @@ Blockly.Blocks['SELECT+FROM'] = {
 
 // generate code block for SELECT+FROM
 Blockly.JavaScript['SELECT+FROM'] = function(block) {
-  // select dropdown
   var select = block.getFieldValue('SELECT_FIELD');
-  // add in line select text
-  var text = (block.getFieldValue('SELECT_TEXT'));
-  // add any text from input blocks
-  var input = Blockly.JavaScript.statementToCode(block, 'SELECT', Blockly.JavaScript.ORDER_ATOMIC);
-  // from dropdown
+  var text = block.getFieldValue('SELECT_TEXT');
+  var input = Blockly.JavaScript.valueToCode(block, 'SELECT', Blockly.JavaScript.ORDER_ATOMIC); // Corrected to valueToCode
   var from = block.getFieldValue('FROM_FIELD');
 
   var code = 'SELECT ' + select + text + input + ' FROM ' + from;
@@ -146,7 +204,7 @@ Blockly.Blocks['COMPARE'] = {
     this.setOutput(true, 'Number');
     // first value
     this.appendValueInput('A')
-        .setCheck(['Number', 'var', 'exp']);
+        .setCheck(['Number', 'var', 'exp', 'VAR']);
     // adding dropdown menu of operators required
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([
@@ -157,8 +215,8 @@ Blockly.Blocks['COMPARE'] = {
             ['<=', '<=']]), 'compare');
     // second value
     this.appendValueInput('B')
-        .setCheck(['Number', 'var', 'exp']);
-    this.setInputsInline(true);
+        .setCheck(['Number', 'var', 'exp', 'VAR']);
+    this.setInputsInline(false);
     this.setColour('#A0C4FF');
     this.setTooltip(Blockly.Msg.MATH_ARITHMETIC_TOOLTIP);
   }
@@ -182,7 +240,7 @@ Blockly.Blocks['WHERE'] = {
   init: function() {
     this.appendValueInput('WHERE')
         .appendField('WHERE ')
-        .setCheck(['var','Number','exp']);
+        .setCheck(['var','Number','exp', 'VAR']);
     // can be connected anywhere to anything
     this.setPreviousStatement(true, null); 
     this.setNextStatement(true, null);
@@ -232,7 +290,7 @@ Blockly.Blocks['GROUPBY'] = {
     this.appendValueInput('GROUPBY')
         .appendField('GROUP BY')
         // get group by variable
-        .setCheck('var');
+        .setCheck('var', 'VAR');
     this.setInputsInline(true);
     this.setPreviousStatement(true, null); 
     this.setNextStatement(true, null)
@@ -328,4 +386,3 @@ Blockly.JavaScript['CONNECTION'] = function(block) {
   code += 'var db = new sqlite3.Database(' + dbPath + ');\n';
   return code;
 };
-

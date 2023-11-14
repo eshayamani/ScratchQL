@@ -24,6 +24,7 @@ Blockly.Blocks['VAR'] = {
         .appendField(new Blockly.FieldDropdown(this.populateTables.bind(this)), 'TABLES');
 
     this.appendDummyInput('COLUMN_SELECTOR')
+        .appendField('Variable:')
         .appendField(new Blockly.FieldDropdown([['Select a table first', '']]), 'COLUMNS');
 
     this.setColour('#FFAB91');
@@ -208,7 +209,7 @@ Blockly.Blocks['COMPARE'] = {
     this.setOutput(true, 'Number');
     // first value
     this.appendValueInput('A')
-        .setCheck(['Number', 'var', 'exp']);
+        .setCheck(['Number', 'var', 'exp', 'VAR']);
     // adding dropdown menu of operators required
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([
@@ -219,7 +220,7 @@ Blockly.Blocks['COMPARE'] = {
             ['<=', '<=']]), 'compare');
     // second value
     this.appendValueInput('B')
-        .setCheck(['Number', 'var', 'exp']);
+        .setCheck(['Number', 'var', 'exp', 'VAR']);
     this.setInputsInline(true);
     this.setColour('#A0C4FF');
     this.setTooltip(Blockly.Msg.MATH_ARITHMETIC_TOOLTIP);
@@ -244,7 +245,7 @@ Blockly.Blocks['WHERE'] = {
   init: function() {
     this.appendValueInput('WHERE')
         .appendField('WHERE ')
-        .setCheck(['var','Number','exp']);
+        .setCheck(['var','Number','exp', 'VAR']);
     // can be connected anywhere to anything
     this.setPreviousStatement(true, null); 
     this.setNextStatement(true, null);
@@ -294,7 +295,7 @@ Blockly.Blocks['GROUPBY'] = {
     this.appendValueInput('GROUPBY')
         .appendField('GROUP BY')
         // get group by variable
-        .setCheck('var');
+        .setCheck('var', 'VAR');
     this.setInputsInline(true);
     this.setPreviousStatement(true, null); 
     this.setNextStatement(true, null)
@@ -388,33 +389,5 @@ Blockly.JavaScript['CONNECTION'] = function(block) {
   var dbPath = Blockly.JavaScript.valueToCode(block, 'CONNECTION', Blockly.JavaScript.ORDER_ATOMIC);
   var code = 'var sqlite3 = require("sqlite3").verbose();\n';
   code += 'var db = new sqlite3.Database(' + dbPath + ');\n';
-  return code;
-};
-
-// INNER_JOIN - 'INNERJOIN'
-Blockly.Blocks['INNERJOIN'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField('INNER JOIN');
-    this.appendValueInput('SECOND_TABLE')
-        .setCheck('String')
-        .appendField('TABLE');
-    this.appendValueInput('ON_CONDITION')
-        .setCheck('String')
-        .appendField('ON');
-    this.setPreviousStatement(true, 'SqlStatement');
-    this.setNextStatement(true, 'SqlStatement');
-    this.setColour('#FFAB91');
-    this.setTooltip('Perform an INNER JOIN with another table');
-    this.setHelpUrl('');
-  }
-};
-
-// Generate JavaScript code for the INNER JOIN block
-Blockly.JavaScript['INNERJOIN'] = function(block) {
-  var secondTable = Blockly.JavaScript.valueToCode(block, 'SECOND_TABLE', Blockly.JavaScript.ORDER_ATOMIC);
-  var onCondition = Blockly.JavaScript.valueToCode(block, 'ON_CONDITION', Blockly.JavaScript.ORDER_ATOMIC);
-
-  var code = `INNER JOIN ${secondTable} ON ${onCondition} `;
   return code;
 };

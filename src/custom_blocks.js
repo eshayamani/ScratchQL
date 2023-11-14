@@ -55,10 +55,9 @@ Blockly.Blocks['VAR'] = {
 };
 
 Blockly.JavaScript['VAR'] = function(block) {
-  var table = block.getFieldValue('TABLES');
   var column = block.getFieldValue('COLUMNS');
   var code = column;
-  return code;
+  return [code, Blockly.JavaScript.ORDER_ATOMIC]; // Returns a tuple
 };
 
 // SELECT and FROM 'select+from'
@@ -100,13 +99,9 @@ Blockly.Blocks['SELECT+FROM'] = {
 
 // generate code block for SELECT+FROM
 Blockly.JavaScript['SELECT+FROM'] = function(block) {
-  // select dropdown
   var select = block.getFieldValue('SELECT_FIELD');
-  // add in line select text
-  var text = (block.getFieldValue('SELECT_TEXT'));
-  // add any text from input blocks
-  var input = Blockly.JavaScript.statementToCode(block, 'SELECT', Blockly.JavaScript.ORDER_ATOMIC);
-  // from dropdown
+  var text = block.getFieldValue('SELECT_TEXT');
+  var input = Blockly.JavaScript.valueToCode(block, 'SELECT', Blockly.JavaScript.ORDER_ATOMIC); // Corrected to valueToCode
   var from = block.getFieldValue('FROM_FIELD');
 
   var code = 'SELECT ' + select + text + input + ' FROM ' + from;
@@ -221,7 +216,7 @@ Blockly.Blocks['COMPARE'] = {
     // second value
     this.appendValueInput('B')
         .setCheck(['Number', 'var', 'exp', 'VAR']);
-    this.setInputsInline(true);
+    this.setInputsInline(false);
     this.setColour('#A0C4FF');
     this.setTooltip(Blockly.Msg.MATH_ARITHMETIC_TOOLTIP);
   }

@@ -1,3 +1,65 @@
+const tableColumns = {
+  'actor': ['actor_id', 'first_name', 'last_name', 'last_update'],
+  'address': ['address_id', 'address', 'address2', 'district', 'city_id', 'postal_code', 'phone', 'last_update'],
+  'category': ['category_id', 'name', 'last_update'],
+  'city': ['city_id', 'city', 'country_id', 'last_update'],
+  'country': ['country_id', 'country', 'last_update'],
+  'customer': ['customer_id', 'store_id', 'first_name', 'last_name', 'email', 'address_id', 'active', 'create_date', 'last_update'],
+  'film': ['film_id', 'title', 'description', 'release_year', 'language_id', 'original_language_id', 'rental_duration', 'rental_rate', 'length', 'replacement_cost', 'rating', 'special_features', 'last_update'],
+  'film_actor': ['actor_id', 'film_id', 'last_update'],
+  'film_category': ['film_id', 'category_id', 'last_update'],
+  'film_text': ['film_id', 'title', 'description'],
+  'inventory': ['inventory_id', 'film_id', 'store_id', 'last_update'],
+  'language': ['language_id', 'name', 'last_update'],
+  'payment': ['payment_id', 'customer_id', 'staff_id', 'rental_id', 'amount', 'payment_date', 'last_update'],
+  'rental': ['rental_id', 'rental_date', 'inventory_id', 'customer_id', 'return_date', 'staff_id', 'last_update'],
+  'staff': ['staff_id', 'first_name', 'last_name', 'address_id', 'picture', 'email', 'store_id', 'active', 'username', 'password', 'last_update'],
+  'store': ['store_id', 'manager_staff_id', 'address_id', 'last_update'],
+}
+
+Blockly.Blocks['VAR'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField('Table:')
+        .appendField(new Blockly.FieldDropdown(this.populateTables.bind(this)), 'TABLES');
+
+    this.appendDummyInput('COLUMN_SELECTOR')
+        .appendField(new Blockly.FieldDropdown([['Select a table first', '']]), 'COLUMNS');
+
+    this.setColour('#FFAB91');
+    this.setTooltip('Select a column from a table');
+    this.setOutput(true, 'VAR');
+  },
+
+  populateTables: function() {
+    return Object.keys(tableColumns).map(table => [table, table]);
+  },
+
+  onchange: function(changeEvent) {
+    if (changeEvent.element === 'field' && changeEvent.name === 'TABLES') {
+      this.updateColumnsDropdown(changeEvent.newValue);
+    }
+  },
+
+  updateColumnsDropdown: function(selectedTable) {
+    if (tableColumns[selectedTable]) {
+      this.getInput('COLUMN_SELECTOR').removeField('COLUMNS');
+      this.getInput('COLUMN_SELECTOR').appendField(new Blockly.FieldDropdown(tableColumns[selectedTable].map(col => [col, col])), 'COLUMNS');
+    } else {
+      this.getInput('COLUMN_SELECTOR').removeField('COLUMNS');
+      this.getInput('COLUMN_SELECTOR').appendField(new Blockly.FieldDropdown([['Select a table first', '']]), 'COLUMNS');
+    }
+  }
+
+};
+
+Blockly.JavaScript['VAR'] = function(block) {
+  var table = block.getFieldValue('TABLES');
+  var column = block.getFieldValue('COLUMNS');
+  var code = column;
+  return code;
+};
+
 // SELECT and FROM 'select+from'
 // first block of a query
 Blockly.Blocks['SELECT+FROM'] = {
@@ -5,7 +67,7 @@ Blockly.Blocks['SELECT+FROM'] = {
     // SELECT statement with dropdown menu
     this.appendValueInput('SELECT')
       .appendField('SELECT ')
-      .setCheck(['var','AGGREGATE'])
+      .setCheck(['VAR', 'var','AGGREGATE'])
       .appendField(new Blockly.FieldDropdown([
         ['\u0020', ''],
         ['ALL', '*'],
@@ -329,3 +391,30 @@ Blockly.JavaScript['CONNECTION'] = function(block) {
   return code;
 };
 
+// INNER_JOIN - 'INNERJOIN'
+Blockly.Blocks['INNERJOIN'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField('INNER JOIN');
+    this.appendValueInput('SECOND_TABLE')
+        .setCheck('String')
+        .appendField('TABLE');
+    this.appendValueInput('ON_CONDITION')
+        .setCheck('String')
+        .appendField('ON');
+    this.setPreviousStatement(true, 'SqlStatement');
+    this.setNextStatement(true, 'SqlStatement');
+    this.setColour('#FFAB91');
+    this.setTooltip('Perform an INNER JOIN with another table');
+    this.setHelpUrl('');
+  }
+};
+
+// Generate JavaScript code for the INNER JOIN block
+Blockly.JavaScript['INNERJOIN'] = function(block) {
+  var secondTable = Blockly.JavaScript.valueToCode(block, 'SECOND_TABLE', Blockly.JavaScript.ORDER_ATOMIC);
+  var onCondition = Blockly.JavaScript.valueToCode(block, 'ON_CONDITION', Blockly.JavaScript.ORDER_ATOMIC);
+
+  var code = `INNER JOIN ${secondTable} ON ${onCondition} `;
+  return code;
+};

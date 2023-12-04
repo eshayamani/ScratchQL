@@ -329,3 +329,43 @@ Blockly.JavaScript['CONNECTION'] = function(block) {
   return code;
 };
 
+Blockly.JavaScript['sql_connection'] = function(block) {
+  var ip = block.getFieldValue('VALUE');
+  // Get other field values (username, password, database name, etc.)
+
+  var code = 
+    mysql = require('mysql');
+
+    // Create a connection to the database
+    const connection = mysql.createConnection({
+      host: '${ip}',
+      user: 'root',
+      password: 'kurz',
+      database: 'sakila'
+    });
+
+    // Connect to the database
+    connection.connect((err) => {
+      if (err) {
+        console.error('Error connecting to the database: ' + err.stack);
+        return;
+      }
+
+      console.log('Connected to the database');
+    });
+
+    // Perform database operations here...
+
+    // Close the connection when done
+    connection.end((err) => {
+      if (err) {
+        console.error('Error closing the database connection: ' + err.stack);
+        return;
+      }
+
+      console.log('Connection closed');
+    });
+  ;
+
+  return code;
+};

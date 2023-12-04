@@ -1,6 +1,6 @@
 # ScratchQL
 
-[Design Page](https://eshayamani.github.io/ScratchQL/src/design-blocks/index.html)
+[Design Page](https://eshayamani.github.io/ScratchQL/src/index.html)
 
 ## Group Members 
 - Sophia Guarnotta

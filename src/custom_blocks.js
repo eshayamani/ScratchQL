@@ -329,7 +329,7 @@ Blockly.JavaScript['CONNECTION'] = function(block) {
   return code;
 };
 
-Blockly.JavaScript['sql_connection'] = function(block) {
+Blockly.JavaScript['CONNECTION'] = function(block) {
   var ip = block.getFieldValue('VALUE');
   // Get other field values (username, password, database name, etc.)
 

@@ -47,7 +47,7 @@ Blockly.JavaScript['SELECT+FROM'] = function(block) {
   var from = block.getFieldValue('FROM_FIELD');
 
   var code = 'SELECT ' + select + text + input + ' FROM ' + from;
-  return code;
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
 // USER INPUT - 'input'
@@ -289,7 +289,7 @@ Blockly.JavaScript['LIMIT'] = function(block) {
 Blockly.Blocks['CONNECTION'] = {
   init: function() {
     this.appendValueInput('CONNECTION')
-        .setCheck()
+        .setCheck('SELECT+FROM')
         .appendField("DATABASE PATH");
     this.setColour('#00E497');
     this.setTooltip('Connect to an SQLite database with SQL query');
@@ -297,15 +297,31 @@ Blockly.Blocks['CONNECTION'] = {
 };
 
 // Generate JavaScript code for the SQLite connection block
-Blockly.JavaScript['CONNECTION'] = function(block) {
-  // Generate code to establish a connection
+Blockly.JavaScript['CONNECTION'] = function(block) { 
+  //var query = Blockly.JavaScript.valueToCode(block, 'SELECT+FROM', Blockly.JavaScript.ORDER_ATOMIC);
+    // Get the connected block's code
+  var connectedCode = Blockly.JavaScript.valueToCode(block, 'CONNECTION', Blockly.JavaScript.ORDER_ATOMIC);
+
+  // Generate the connection code
   var code = `
-    const dbConfig = {
-      host: '34.27.128.43',
-      password: 'pl',
-      database: 'scratchql',
-    };
-    const connection = mysql.createConnection(dbConfig);
+    var mysql = require('mysql');
+
+    var cnx = mysql.createConnection({
+        host: "34.27.128.43",
+        user: "root",
+        password: "pl",
+        database: "sakila"
+    });
+
+    cnx.connect(function(err) {
+        if (err) throw err;
+        var sql = "${connectedCode}"
+        cnx.query(sql, function (err, result, fields) {
+            if (err) throw err;
+            cnx.destroy(); 
+        });
+    });
   `;
+
   return code;
 };

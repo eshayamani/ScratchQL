@@ -29,16 +29,12 @@
             <block type="GROUPBY"></block>
             <block type="ORDERBY"></block>
             <block type="LIMIT"></block>
-            <block type="CONNECTION">
-                <value name="IP">
-                  <field name="VALUE">34.27.128.43</field>
-                </value>
-              </block>
+            <block type="CONNECTION"></block>
         </xml>
     </div>
     <div class="row button-row">
-        <button onclick="generateCode()">Generate Python</button>
-        <button onclick="runCode()">Run Python</button>
+        <button onclick="generateCode()">Generate Code</button>
+        <button onclick="runCode()">Run Code</button>
         <button onclick="saveBlocks()">Save Blocks</button>
         <button onclick="loadBlocks()">Load Blocks</button>
         <input type="file" id="loadInput" style="display: none;" onchange="loadBlocksFile(event)">

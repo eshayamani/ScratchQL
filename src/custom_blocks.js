@@ -90,12 +90,6 @@ Blockly.JavaScript['NUMBER'] = function(block) {
   return [numValue, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
-// AS - 'as'
-
-// ALL - 'all'
-
-// MEMBERSHIP OPERATOR (DOT NOTATION) - 'membership'
-
 // AGGREGATES - 'aggregate'
 // (MIN, MAX, AVG, COUNT, SUM) - 'agg_min', 'agg_max', 'agg_avg', 'agg_count', 'agg_sum'
 Blockly.Blocks['AGGREGATE'] = {
@@ -127,9 +121,6 @@ Blockly.JavaScript['AGGREGATE'] = function(block) {
   var code = agg + '(' + input + ')';
   return code;
 };
-
-// TABLE - 'table'
-
 // JOIN - 'join' 
 
 // COMPARISON - 'compare'
@@ -213,18 +204,6 @@ Blockly.JavaScript['WHERE'] = function(block) {
   
   return code;
 };
-
-// BETWEEN - 'between'
-
-// AND - 'and'
-
-// OR - 'or'
-
-// NULL - 'null'
-
-// IN - 'in'
-
-// NOT - 'not'
 
 // GROUP BY - 'groupby'
 Blockly.Blocks['GROUPBY'] = {
@@ -312,60 +291,21 @@ Blockly.Blocks['CONNECTION'] = {
     this.appendValueInput('CONNECTION')
         .setCheck()
         .appendField("DATABASE PATH");
-    this.appendValueInput('SQL_BLOCK')
-        .setCheck(null)
-        .appendField("QUERY");
-
-    this.setColour('#CC1100');
+    this.setColour('#00E497');
     this.setTooltip('Connect to an SQLite database with SQL query');
   }
 };
 
 // Generate JavaScript code for the SQLite connection block
 Blockly.JavaScript['CONNECTION'] = function(block) {
-  var dbPath = Blockly.JavaScript.valueToCode(block, 'CONNECTION', Blockly.JavaScript.ORDER_ATOMIC);
-  var code = 'var sqlite3 = require("sqlite3").verbose();\n';
-  code += 'var db = new sqlite3.Database(' + dbPath + ');\n';
-  return code;
-};
-
-Blockly.JavaScript['CONNECTION'] = function(block) {
-  var ip = block.getFieldValue('VALUE');
-  // Get other field values (username, password, database name, etc.)
-
-  var code = 
-    mysql = require('mysql');
-
-    // Create a connection to the database
-    const connection = mysql.createConnection({
-      host: '${ip}',
-      user: 'root',
-      password: 'kurz',
-      database: 'sakila'
-    });
-
-    // Connect to the database
-    connection.connect((err) => {
-      if (err) {
-        console.error('Error connecting to the database: ' + err.stack);
-        return;
-      }
-
-      console.log('Connected to the database');
-    });
-
-    // Perform database operations here...
-
-    // Close the connection when done
-    connection.end((err) => {
-      if (err) {
-        console.error('Error closing the database connection: ' + err.stack);
-        return;
-      }
-
-      console.log('Connection closed');
-    });
-  ;
-
+  // Generate code to establish a connection
+  var code = `
+    const dbConfig = {
+      host: '34.27.128.43',
+      password: 'pl',
+      database: 'scratchql',
+    };
+    const connection = mysql.createConnection(dbConfig);
+  `;
   return code;
 };

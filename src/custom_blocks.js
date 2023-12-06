@@ -304,33 +304,24 @@ Blockly.JavaScript['CONNECTION'] = function(block) {
 
   // Generate the connection code
   var code = `
-  # Replace the following information with your database credentials
   db_config = {
       'host': '34.27.128.43',
       'user': 'root',
       'password': 'pl',
       'database': 'sakila'
   }
-  
-  # Establish a connection to the MySQL server
   cnx = mysql.connector.connect(db_config)
-  
   try:
       cursor = cnx.cursor()
-  
-      # Replace 'your_table' with the actual table name
       query = "${connectedCode}"
       
       cursor.execute(query)
-  
-      # Fetch all the rows
+
       result = cursor.fetchall()
-  
       for row in result:
           print(row)
   
   finally:
-      # Close the cursor and connection
       cursor.close()
       cnx.close()`  
   ;

@@ -16,6 +16,7 @@ Blockly.Blocks['SELECT+FROM'] = {
     this.appendValueInput('FROM')
       .appendField('FROM ')
       // adding 5 out of 17 table names 
+      .setCheck(['SELECT+FROM', 'var'])
       .appendField(new Blockly.FieldDropdown([
         ['\u0020', 'blank'],
         ['ACTOR', 'actor'],
@@ -24,7 +25,8 @@ Blockly.Blocks['SELECT+FROM'] = {
         ['CITY', 'city'],
         ['COUNTRY', 'country'],
         ['CUSTOMER', 'customer'],
-        ['FILM', 'film']]), 'FROM_FIELD');
+        ['FILM', 'film'],
+        ['subquery', '(']]), 'FROM_FIELD');
 
     this.setInputsInline(false);
     this.setPreviousStatement(false); // no previoud
@@ -38,15 +40,18 @@ Blockly.Blocks['SELECT+FROM'] = {
 // generate code block for SELECT+FROM
 Blockly.JavaScript['SELECT+FROM'] = function(block) {
   // select dropdown
-  var select = block.getFieldValue('SELECT_FIELD');
+  var select = block.getFieldValue('SELECT_FIELD', Blockly.JavaScript.ORDER_ATOMIC);
   // add in line select text
-  var text = (block.getFieldValue('SELECT_TEXT'));
+  var text = (block.getFieldValue('SELECT_TEXT', Blockly.JavaScript.ORDER_ATOMIC));
   // add any text from input blocks
   var input = Blockly.JavaScript.statementToCode(block, 'SELECT', Blockly.JavaScript.ORDER_ATOMIC);
   // from dropdown
-  var from = block.getFieldValue('FROM_FIELD');
+  var from = block.getFieldValue('FROM_FIELD', Blockly.JavaScript.ORDER_ATOMIC);
+  // subqueries option
+  var nestedSelect = Blockly.JavaScript.valueToCode(block, 'FROM', Blockly.JavaScript.ORDER_ATOMIC);
+  var connectedCode = nestedSelect ? ' ' + nestedSelect + ')' : '';
 
-  var code = 'SELECT ' + select + text + input + ' FROM ' + from;
+  var code = 'SELECT ' + select + text + input + ' FROM ' + from + connectedCode;
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 

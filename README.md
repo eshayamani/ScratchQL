@@ -28,7 +28,7 @@ The project implements parsing as it will be used to understand and translate SQ
 - To connect to the sakila database, type 'USE sakila;'
     - If you want to check to make sure you are in the database, type: 'SHOW TABLES;'
 ### Generate a Query
-- [ScratchQL Blockly](https://eshayamani.github.io/ScratchQL/design-blocks/)
+- [ScratchQL Blockly](https://eshayamani.github.io/ScratchQL/src/index.html)
     - Use our blockly interface to build a query with blocks
     - Once you are done, click the Generate Python button, which will output the SQL query that can be run in MySQL.
     - Copy the query to clipboard and paste it into your terminal.

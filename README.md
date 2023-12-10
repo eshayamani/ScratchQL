@@ -32,3 +32,26 @@ The project implements parsing as it will be used to understand and translate SQ
     - Use our blockly interface to build a query with blocks
     - Once you are done, click the Generate Python button, which will output the SQL query that can be run in MySQL.
     - Copy the query to clipboard and paste it into your terminal.
+
+## Future Work
+- In the future we would like to either find a server that Is able to connect to the blockly page without issues or simply eliminate the need for blockly and make this program on a different front end. We would additionally add some features that automatically support different databases in case inexperienced users want to access this and use it without changing the code.
+
+## Work Division
+- Sophia Guarnotta
+    - [Design Files](design2.md)
+        - Worked on design files for submissions
+    - [Code for Blocks](milestone1/custom_blocks.js)
+        - Worked on code generation for queries
+    - Cloud Database Integration
+        - Also tried to make connection from back to front end
+- Esha Yamani
+    - [Code for Blocks](milestone1/custom_blocks.js)
+        - Continued code set up and worked on WHERE, LIMIT, COMPARE, and input blocks
+        - Worked on code generation for queries
+    - [Demo Video](milestone1/Demo1.mp4)
+        - Recorded demo video for milestone 1
+- Ponthea Zahraii
+    - [Code for Blocks](milestone1/custom_blocks.js)
+        - Initial code set up that include basic SELECT, FROM, and WHERE blocks
+    - [html file](milestone1/index.html)
+        - Worked on getting the blocks on the git hub page

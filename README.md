@@ -6,11 +6,15 @@
 - Sophia Guarnotta
 - Esha Yamani
 - Ponthea Zahraii
+
+## Demo Videos
+- [Design Files](docs/design_demo.mp4)
+- [Demo Video](docs/technical_demo.mp4)
   
 ## Motivation 
 Having all taken the database course and having worked with databases in the past for different projects such as research, we thought having a project centered around databases and making it easy to query a database for people with little to no SQL experience seemed very appealing to us. Also, using software that has good UIs for accessing databases is not easily accessible to the public as companies such as Oracle and Amazon put them behind paywalls and are mainly supported by companies. Having something like ScratchQL would be very useful because it would allow for a user-friendly way to query databases, as one would not have to learn SQL. 
 
-## Description of Project 
+## Functionality 
 ### What is the project?
 The project would consist of a querying tool for databases. The backend of the project would use pre-existing databases that can be accessed through SQL along with Blockly to implement the functionality. To ensure security, ScratchQL would only allow users to query using SELECT statements. This allows for control over access, giving users only what they need in order to maintain data security.
 
@@ -39,9 +43,9 @@ The project implements parsing as it will be used to understand and translate SQ
 
 - If someone else wishes to make changes to this project, they can fork it to their own github and personalize it for their database and add any blocks they may want. If someone wants us to fix something in our project, they can raise an issue on our repo. 
 
-## Work Division
+## Contributions
 - Sophia Guarnotta
-    - [Design Files](docs)
+    - [Design Files](docs/design_demo.mp4)
         - Worked on design files for submissions
     - [Code for Blocks](src/custom_blocks.js)
         - Worked on code generation for queries

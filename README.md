@@ -25,6 +25,7 @@ The project implements parsing as it will be used to understand and translate SQ
 - In your terminal, type 'mysql --host=34.27.128.43 --user=root --password'
     - when prompted for password, type in pl
     - you are now in our cloud mysql server
+    - YOU WILL ONLY BE ALLOWED TO CONNECT ON THE CHAPMAN CAMPUS WIFI, if for some reason you need to connect from elsewhere we would need to add your public IP address to the network confuguration of the cloud server.
 - To connect to the sakila database, type 'USE sakila;'
     - If you want to check to make sure you are in the database, type: 'SHOW TABLES;'
 ### Generate a Query
@@ -35,6 +36,8 @@ The project implements parsing as it will be used to understand and translate SQ
 
 ## Future Work
 - In the future we would like to either find a server that Is able to connect to the blockly page without issues or simply eliminate the need for blockly and make this program on a different front end. We would additionally add some features that automatically support different databases in case inexperienced users want to access this and use it without changing the code.
+
+- If someone else wishes to make changes to this project, they can fork it to their own github and personalize it for their database and add any blocks they may want. If someone wants us to fix something in our project, they can raise an issue on our repo. 
 
 ## Work Division
 - Sophia Guarnotta

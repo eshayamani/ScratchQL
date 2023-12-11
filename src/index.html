@@ -50,7 +50,7 @@
             scrollbars: true
         });
         
-        var defaultBlocksDom = Blockly.utils.xml.textToDom(default_blocks);
+        var defaultBlocksDom = Blockly.utils.xml.textToDom(defaultBlocks);
         Blockly.Xml.domToWorkspace(defaultBlocksDom, workspace);
 
         function generateCode() {

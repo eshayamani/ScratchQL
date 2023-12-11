@@ -25,7 +25,7 @@ The project implements parsing as it will be used to understand and translate SQ
 - In your terminal, type 'mysql --host=34.27.128.43 --user=root --password'
     - when prompted for password, type in pl
     - you are now in our cloud mysql server
-    - YOU WILL ONLY BE ALLOWED TO CONNECT ON THE CHAPMAN CAMPUS WIFI, if for some reason you need to connect from elsewhere we would need to add your public IP address to the network confuguration of the cloud server.
+    - YOU WILL ONLY BE ALLOWED TO CONNECT ON THE CHAPMAN CAMPUS WIFI, if for some reason you need to connect from elsewhere we would need to add your public IP address to the network connection configuration of the cloud server.
 - To connect to the sakila database, type 'USE sakila;'
     - If you want to check to make sure you are in the database, type: 'SHOW TABLES;'
 ### Generate a Query
@@ -41,20 +41,20 @@ The project implements parsing as it will be used to understand and translate SQ
 
 ## Work Division
 - Sophia Guarnotta
-    - [Design Files](design2.md)
+    - Design Files
         - Worked on design files for submissions
-    - [Code for Blocks](milestone1/custom_blocks.js)
+    - Code for Blocks
         - Worked on code generation for queries
     - Cloud Database Integration
         - Also tried to make connection from back to front end
 - Esha Yamani
-    - [Code for Blocks](milestone1/custom_blocks.js)
+    - Code for Blocks
         - Continued code set up and worked on WHERE, LIMIT, COMPARE, and input blocks
         - Worked on code generation for queries
     - [Demo Video](milestone1/Demo1.mp4)
         - Recorded demo video for milestone 1
 - Ponthea Zahraii
-    - [Code for Blocks](milestone1/custom_blocks.js)
+    - Code for Blocks
         - Initial code set up that include basic SELECT, FROM, and WHERE blocks
-    - [html file](milestone1/index.html)
+    - html file
         - Worked on getting the blocks on the git hub page

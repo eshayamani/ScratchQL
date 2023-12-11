@@ -41,20 +41,20 @@ The project implements parsing as it will be used to understand and translate SQ
 
 ## Work Division
 - Sophia Guarnotta
-    - Design Files
+    - [Design Files](docs)
         - Worked on design files for submissions
-    - Code for Blocks
+    - [Code for Blocks](src/custom_blocks.js)
         - Worked on code generation for queries
     - Cloud Database Integration
         - Also tried to make connection from back to front end
 - Esha Yamani
-    - Code for Blocks
+    - [Code for Blocks](src/custom_blocks.js)
         - Continued code set up and worked on WHERE, LIMIT, COMPARE, and input blocks
         - Worked on code generation for queries
     - [Demo Video](docs/technical_demo.mp4)
         - Recorded demo video for milestone 1
 - Ponthea Zahraii
-    - Code for Blocks
+    - [Code for Blocks](src/custom_blocks.js)
         - Initial code set up that include basic SELECT, FROM, and WHERE blocks
-    - html file
+    - [html file](src/index.html)
         - Worked on getting the blocks on the git hub page

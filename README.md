@@ -51,7 +51,7 @@ The project implements parsing as it will be used to understand and translate SQ
     - Code for Blocks
         - Continued code set up and worked on WHERE, LIMIT, COMPARE, and input blocks
         - Worked on code generation for queries
-    - [Demo Video](milestone1/Demo1.mp4)
+    - [Demo Video](docs/technical_demo.mp4)
         - Recorded demo video for milestone 1
 - Ponthea Zahraii
     - Code for Blocks

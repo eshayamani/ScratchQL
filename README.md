@@ -8,7 +8,7 @@
 - Ponthea Zahraii
 
 ## Demo Videos
-- [Design Files](docs/Design_Demo.m4v)
+- [Design Files](docs/design_demo.m4v)
 - [Demo Video](docs/technical_demo.mp4)
   
 ## Motivation 
